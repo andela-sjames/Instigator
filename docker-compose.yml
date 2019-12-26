@@ -12,6 +12,7 @@ services:
     hostname: zoo1
     ports:
      - "2181:2181"
+     - "8080:8080"
     environment:
       ZOO_MY_ID: 1
 
@@ -22,6 +23,7 @@ services:
     hostname: zoo2
     ports:
      - "2182:2181"
+     - "8081:8080"
     environment:
       ZOO_MY_ID: 2
 
@@ -32,5 +34,6 @@ services:
     hostname: zoo3
     ports:
      - "2183:2181"
+     - "8082:8080"
     environment:
       ZOO_MY_ID: 3
