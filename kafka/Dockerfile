@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 
-ARG KAFKA_VERSION=1.1.1
+ARG KAFKA_VERSION=2.4.0
 ARG KAFKA_HOME_DIR=/opt/kafka
 ARG KAFKA_MIRROR=https://www.apache.org/dist/kafka
 
