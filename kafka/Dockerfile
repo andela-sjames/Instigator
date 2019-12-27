@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/openjdk
-FROM openjdk:11-jdk-alpine
+FROM openjdk:14-jdk-alpine
 
 ARG KAFKA_VERSION=2.4.0
 ARG KAFKA_HOME_DIR=/opt/kafka

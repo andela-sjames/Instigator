@@ -7,7 +7,7 @@ ARG KAFKA_JMX_PORT=9999
 RUN mkdir -p $KAFKA_LOG_DIR
 
 COPY docker-entrypoint.sh ./bin/
-RUN chmod +x ./bin/docker-entrypoint.sh
+RUN chmod +x bin/docker-entrypoint.sh
 
 ENV KAFKA_LOG_DIR=$KAFKA_LOG_DIR
 ENV KAFKA_PORT=$KAFKA_PORT
@@ -23,4 +23,4 @@ ENV KAFKA_NUM_REPLICA_FETCHERS=1
 
 EXPOSE $KAFKA_PORT $KAFKA_JMX_PORT
 
-CMD ["docker-entrypoint.sh"]
+CMD ["bin/docker-entrypoint.sh"]
