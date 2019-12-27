@@ -1,0 +1,8 @@
+.DS_Store
+.gitignore
+README.md
+
+.dockerignore
+log/
+Dockerfile*
+docker-compose*
