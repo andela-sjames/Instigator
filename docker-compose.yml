@@ -65,7 +65,7 @@ services:
       - zoo3
 
   kafka-manager:
-    image: hlebalbau/kafka-manager:stable
+    image: hlebalbau/kafka-manager
     ports:
       - "9000:9000"
     environment:
