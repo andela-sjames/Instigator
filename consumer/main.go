@@ -53,11 +53,11 @@ func StartConsumerHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-// EndConsumerHandler route defined
-func EndConsumerHandler(w http.ResponseWriter, r *http.Request) {
+// StopConsumerHandler route defined
+func StopConsumerHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{
 		"status":  "200",
-		"message": "Welcome to Consumer API",
+		"message": "To be determined!!",
 	})
 }
 
@@ -73,19 +73,19 @@ func main() {
 	router.HandleFunc("/start_consumer", StartConsumerHandler)
 
 	// Stop Consumer Route
-	router.HandleFunc("/end_consumer", EndConsumerHandler)
+	router.HandleFunc("/stop_consumer", StopConsumerHandler)
 
 	// server block defined here
 	srv := &http.Server{
 		Handler: router,
-		Addr:    "0.0.0.0:8000",
+		Addr:    "0.0.0.0:5001",
 
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
 
-	log.Println("Starting server on port :8000")
+	log.Println("Starting server on port :5001")
 	log.Fatal(srv.ListenAndServe())
 
 }

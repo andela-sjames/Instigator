@@ -52,7 +52,7 @@ def stop():
     global globalThread
     if request.method == 'GET':
         globalThread.cancel()
-        return 'Producer stoped'
+        return 'Producer stopped'
     
 atexit.register(exit_thread)
 

@@ -98,6 +98,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./consumer:/app
+    ports: 
+      - "5001:5001"
     depends_on:
       - broker
       - producer
