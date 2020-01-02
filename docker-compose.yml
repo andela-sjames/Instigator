@@ -57,7 +57,6 @@ services:
       - 9092-9094:${KAFKA_PORT:-9092}
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zoo1:2181,zoo2:2181,zoo3:2181
-      - JMX_PORT=
     depends_on:
       - kafka
       - zoo1
@@ -78,7 +77,8 @@ services:
 
   producer:
     image: instigator/producer
-    container_name: flask_producer
+    container_name: instigator_producer
+    restart: on-failure
     build:
       context: ./producer
       dockerfile: Dockerfile

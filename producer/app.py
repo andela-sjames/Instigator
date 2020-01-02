@@ -13,9 +13,9 @@ WAIT_TIME = 2 #Seconds
 globalThread = threading.Thread()
 
 client = KafkaClient(hosts="broker:9092,broker:9093,broker:9093")
-client.topics
 
 topicOne = client.topics['sampleOne']
+print(client.topics, "topics listed", file=sys.stdout)
 
 def get_generator():
     import random
@@ -23,9 +23,9 @@ def get_generator():
     # run outside the request context
     globalThread = threading.Timer(WAIT_TIME, get_generator, ())
     globalThread.start()
-    with topicOne.get_sync_producer(use_rdkafka=True) as producer:
-        resp  = {"random_value": random.random() * 5}
-        producer.produce(resp)
+    with topicOne.get_producer(use_rdkafka=True) as producer:
+        resp  = "random number " + str(random.random() * 5)
+        producer.produce(resp.encode(), partition_key=b"testOne")
         print(resp, file=sys.stdout)
 
 def exit_thread():
