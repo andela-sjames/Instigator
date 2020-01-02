@@ -7,7 +7,6 @@ from pykafka import KafkaClient
 
 app = Flask(__name__)
 
-
 WAIT_TIME = 2 #Seconds
 
 globalThread = threading.Thread()
@@ -35,11 +34,9 @@ def exit_thread():
         globalThread.cancel()
         print(" exit_thread called", file=sys.stdout)
 
-
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
-
 
 @app.route('/start_producer', methods=['GET', ])
 def produce():
@@ -50,7 +47,6 @@ def produce():
         globalThread.start()
         return 'Producer started'
 
-
 @app.route('/stop_producer', methods=['GET', ])
 def stop():
     global globalThread
@@ -58,9 +54,7 @@ def stop():
         globalThread.cancel()
         return 'Producer stoped'
     
-    
 atexit.register(exit_thread)
-
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -88,3 +88,16 @@ services:
       - "5000:5000"
     depends_on:
       - broker
+
+  consumer:
+    image: instigator/consumer
+    container_name: instigator_consumer
+    restart: on-failure
+    build:
+      context: ./consumer
+      dockerfile: Dockerfile
+    volumes:
+      - ./consumer:/app
+    depends_on:
+      - broker
+      - producer
