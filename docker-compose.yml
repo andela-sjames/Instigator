@@ -75,3 +75,16 @@ services:
       KAFKA_MANAGER_USERNAME: "admin"
       KAFKA_MANAGER_PASSWORD: "admin"
     command: -Dpidfile.path=/dev/null
+
+  producer:
+    image: instigator/producer
+    container_name: flask_producer
+    build:
+      context: ./producer
+      dockerfile: Dockerfile
+      volumes:
+        - ./producer:/app
+      ports: 
+        - "5000:5000"
+      depends_on:
+      - broker

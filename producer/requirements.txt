@@ -2,5 +2,9 @@ Click==7.0
 Flask==1.1.1
 itsdangerous==1.1.0
 Jinja2==2.10.3
+kazoo==2.5.0
 MarkupSafe==1.1.1
+pykafka==2.8.0
+six==1.13.0
+tabulate==0.8.6
 Werkzeug==0.16.0

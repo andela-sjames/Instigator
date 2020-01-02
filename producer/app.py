@@ -3,6 +3,7 @@ import threading
 import atexit
 
 from flask import Flask, request
+from pykafka import KafkaClient
 
 app = Flask(__name__)
 
@@ -11,16 +12,29 @@ WAIT_TIME = 2 #Seconds
 
 globalThread = threading.Thread()
 
+client = KafkaClient(hosts="broker:9092,broker:9093,broker:9093")
+client.topics
+
+topicOne = client.topics['sampleOne']
+
 def get_generator():
     import random
     global globalThread
     # run outside the request context
     globalThread = threading.Timer(WAIT_TIME, get_generator, ())
     globalThread.start()
-    resp  = {
-        "random_value": random.random() * 5
-    }
-    print(resp, file=sys.stdout)
+    with topicOne.get_sync_producer(use_rdkafka=True) as producer:
+        resp  = {"random_value": random.random() * 5}
+        producer.produce(resp)
+        print(resp, file=sys.stdout)
+
+def exit_thread():
+    global globalThread
+    # kill producer irrespective on exit
+    if hasattr(globalThread, 'cancel'):
+        globalThread.cancel()
+        print(" exit_thread called", file=sys.stdout)
+
 
 @app.route('/')
 def hello_world():
@@ -45,7 +59,7 @@ def stop():
         return 'Producer stoped'
     
     
-# atexit.register(stop)
+atexit.register(exit_thread)
 
 
 if __name__ == '__main__':
