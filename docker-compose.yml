@@ -82,9 +82,9 @@ services:
     build:
       context: ./producer
       dockerfile: Dockerfile
-      volumes:
-        - ./producer:/app
-      ports: 
-        - "5000:5000"
-      depends_on:
+    volumes:
+      - ./producer:/app
+    ports: 
+      - "5000:5000"
+    depends_on:
       - broker
