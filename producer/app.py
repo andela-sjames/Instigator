@@ -13,6 +13,7 @@ globalThread = threading.Thread()
 
 client = KafkaClient(hosts="broker:9092,broker:9093,broker:9093")
 
+# topic should exist before calling the GET /start_producer route.
 topicOne = client.topics['sampleOne']
 print(client.topics, "topics listed", file=sys.stdout)
 

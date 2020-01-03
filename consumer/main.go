@@ -24,7 +24,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 // StartConsumerHandler defined
 func StartConsumerHandler(w http.ResponseWriter, r *http.Request) {
 	// to consume messages
-	// make a new reader that consumes from topic-A
+	// make a new reader that consumes from sampleOne
 	fmt.Println("Consumer started")
 	go func() {
 		reader := kafka.NewReader(kafka.ReaderConfig{
