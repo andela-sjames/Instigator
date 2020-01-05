@@ -17,8 +17,8 @@ The application consists of the following services:
 
 - Zookeeper ensemble (3 nodes)
 - Kafka Broker cluster(3 nodes)
-- Go Consumer
 - Python Producer
+- Go Consumer
 - Kafka-manager
 
 These services are coupled together using the `docker-compose.yml` file at the root of the application.
@@ -75,5 +75,22 @@ Username: admin
 password: admin
 ```
 
-####
+#### Python Producer
+ A simple python http server written using the flask framework to simulate a producer for our kafka cluster. It runs on port `5000` http://localhost:5000
 
+It also comes with the following routes to start producing and to stop producing
+```
+http://localhost:5000/
+http://localhost:5000/start_producer
+http://localhost:5000/stop_producer
+```
+
+#### Go Consumer
+ A simple Golang http server written to simulate a consumer for our kafka cluster. It runs on port `5001` http://localhost:5001
+
+It also comes with the following routes to start producing and to stop producing
+```
+http://localhost:5001/
+http://localhost:5001//start_consumer
+http://localhost:5001/stop_consumer
+```
