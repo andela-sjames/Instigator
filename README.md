@@ -1,10 +1,52 @@
 # Instigator
-A simple push/pull project that demonstrates the use of kafka for streaming data between two services. 
+A simple push/pull project that demonstrates the use of kafka for streaming data between two services.
+
+
+## Quickstart
+
+### Build
+```
+docker-compose build
+```
+
+### Bootstrap
+```
+./scripts/populate_broker.sh
+```
+
+### Startup
+```
+docker-compose up
+```
+
+Allow 30~ seconds for everything to stabilize. Expect a ton of log spam until then.
+
+### Working with topics
+Ensure brokers are running. After that, execute a variation of the following command.
+```
+docker exec instigator_broker_1 kafka-topics.sh \
+  --create \
+  --zookeeper zoo3:2181 \
+  --topic testing \
+  --replication-factor 3 \
+  --partitions 1 \
+  --config min.insync.replicas=2 \
+  --config cleanup.policy=compact
+```
+
+When creating a topic, you should stick to `--replication-factor 3` unless you have an explicit
+reason to use less replication. You cannot use a value greater than 3, as there are only 3 brokers.
+To learn more about replication, see the [docs](https://kafka.apache.org/documentation/#replication).
+
 
 ## Docker
 
 To develop and/or run this application, download and install [docker](https://www.docker.com/get-started) and [docker-compose](https://docs.docker.com/compose/install/) from their website before proceeding.
 
+
+**RUN** `./scripts/populate_broker.sh` this will populate the kafka cluster with dummy topics, these topics are referenced by the producer and the consumer, well not all the topics though. Just the topic called `SampleOne`
+
+**Not so fast, Don't do it except you have run the command above**
 Run the command `docker-compose up` from the **root directory** i.e. where you have the `docker-compose.yml` file and you should be good to go.
 
 `docker-compose down` or `CMD/ctrl + C` to stop the application.
