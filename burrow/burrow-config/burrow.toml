@@ -1,0 +1,37 @@
+[zookeeper]
+servers=[ "zoo1:2181", "zoo2:2181", "zoo3:2181" ]
+timeout=6
+root-path="/burrow"
+
+[cluster.instigator]
+class-name="kafka"
+servers=["broker1:9092", "broker2:9092", "broker3:9092"] # assuming 3 brokers within the cluster
+topic-refresh=60
+offset-refresh=30
+
+[consumer.instigator]
+class-name="kafka"
+cluster="instigator"
+servers=["broker1:9092", "broker2:9092", "broker3:9092"] # assuming 3 brokers within the cluster
+offsets-topic="__consumer_offsets"
+group-blacklist="^(console-consumer-|python-kafka-consumer-).*$"
+group-whitelist=""
+
+[consumer.instigator_zk]
+class-name="kafka_zk"
+cluster="instigator"
+servers=[ "zoo1:2181", "zoo2:2181", "zoo3:2181" ]
+zookeeper-path="/conf"
+zookeeper-timeout=30
+group-blacklist="^(console-consumer-|python-kafka-consumer-).*$"
+group-whitelist=""
+
+[httpserver.default]
+address=":8000"
+
+[storage.default]
+class-name="inmemory"
+workers=20
+intervals=15
+expire-group=604800
+min-distance=1
