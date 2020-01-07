@@ -133,6 +133,6 @@ http://localhost:5000/stop_producer
 It also comes with the following routes to start producing and to stop producing
 ```
 http://localhost:5001/
-http://localhost:5001//start_consumer
+http://localhost:5001/start_consumer
 http://localhost:5001/stop_consumer
 ```
