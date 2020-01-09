@@ -118,6 +118,10 @@ services:
       - ./burrow/log/run/burrow.log:/etc/run/burrow.log
     ports:
       - 8000:8000
+    environment: 
+      KAFKA_BROKERS: '"broker1:9092", "broker2:9092", "broker3:9092"'
+      ZOOKEEPER_SERVERS: '"zoo1:2181", "zoo2:2181", "zoo3:2181"'
+      ZOOKEEPER_PATH: '"/conf"'
     depends_on:
       - zoo1
       - zoo2
