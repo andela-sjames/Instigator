@@ -18,6 +18,7 @@ ADD burrow-config/burrow.toml /etc/burrow/
 COPY start.sh /etc/burrow/
 
 WORKDIR /etc/burrow/
+RUN mkdir -p /etc/run /etc/log
 RUN chmod 777 /etc/burrow/start.sh
 
 CMD ["./start.sh"]

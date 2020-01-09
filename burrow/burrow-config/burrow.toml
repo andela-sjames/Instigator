@@ -1,3 +1,17 @@
+[general]
+pidfile="/etc/run/burrow.pid"
+stdout-logfile="/etc/log/burrow.out"
+access-control-allow-origin="*"
+
+[logging]
+filename="/etc/run/burrow.log"
+level="info"
+maxsize=100
+maxbackups=30
+maxage=10
+use-localtime=false
+use-compression=true
+
 [zookeeper]
 servers=[ "zoo1:2181", "zoo2:2181", "zoo3:2181" ]
 timeout=6

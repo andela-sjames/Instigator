@@ -112,7 +112,10 @@ services:
     container_name: instigator_burrow
     restart: always
     volumes:
+      - ./burrow/start.sh:/etc/burrow/start.sh
       - ./burrow/burrow-config:/etc/burrow/
+      - ./burrow/log/status/:/etc/log/
+      - ./burrow/log/run/burrow.log:/etc/run/burrow.log
     ports:
       - 8000:8000
     depends_on:
