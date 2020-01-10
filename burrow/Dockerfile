@@ -1,24 +1,22 @@
-FROM golang:1.12-alpine as builder
+ARG GOLANG_VERSION=1.9.7-alpine3.7
 
-ENV DEP_VERSION="0.5.1"
-RUN apk add --no-cache git curl gcc libc-dev && \
-	curl -L -s https://github.com/golang/dep/releases/download/v${DEP_VERSION}/dep-linux-amd64 -o $GOPATH/bin/dep && \
+FROM golang:$GOLANG_VERSION
+
+ENV BURROW_VERSION="0.3.2"
+RUN apk add --no-cache git curl && \
+	curl -L -s https://github.com/golang/dep/releases/download/v${BURROW_VERSION}/dep-linux-amd64 -o $GOPATH/bin/dep && \
 	chmod +x $GOPATH/bin/dep && \
 	go get github.com/linkedin/Burrow
 
-RUN cd $GOPATH/src/github.com/linkedin/Burrow && \
-	dep ensure && \
-	go build -o /tmp/burrow .
+RUN cd $GOPATH/src/github.com/linkedin/Burrow && dep init && dep ensure && go install
 
-FROM iron/go
-LABEL maintainer="LinkedIn Burrow https://github.com/linkedin/Burrow"
+# create and set working directory
+WORKDIR /etc/burrow/
 
-COPY --from=builder /tmp/burrow /etc/burrow/
 ADD burrow-config/burrow.toml /etc/burrow/
 COPY start.sh /etc/burrow/
 
-WORKDIR /etc/burrow/
 RUN mkdir -p /etc/run /etc/log
-RUN chmod 777 /etc/burrow/start.sh
+RUN chmod +x /etc/burrow/start.sh
 
 CMD ["./start.sh"]
