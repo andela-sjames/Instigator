@@ -132,5 +132,3 @@ services:
       - "instigator_broker_1:broker1"
       - "instigator_broker_2:broker2"
       - "instigator_broker_3:broker3"
-
-    
