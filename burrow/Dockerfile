@@ -6,16 +6,7 @@ RUN apk add --no-cache bash curl gcc git libc-dev && \
 	chmod +x $GOPATH/bin/dep && \
 	GO111MODULE=on go get github.com/linkedin/Burrow
 
-
-# COPY uptime.sh .
-# RUN chmod +x uptime.sh
-
-# RUN mkdir -p /var/log/ && touch /var/log/faillog
-# ENTRYPOINT [ "./uptime.sh" ]
-
-
 RUN cp -R $GOPATH/bin/Burrow /tmp/Burrow
-
 
 ## stage 2: runner
 FROM alpine:3.10
