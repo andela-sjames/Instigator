@@ -10,5 +10,5 @@ echo "start"
 cat $CONFIG_FILE
 
 echo "=========start burrow==========="
-exec /etc/burrow/burrow --config-dir /etc/burrow "${@}"
+exec /app/Burrow --config-dir /etc/burrow "${@}"
 echo "=========starting burrow========"

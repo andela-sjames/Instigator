@@ -110,10 +110,8 @@ services:
       context: ./burrow
       dockerfile: Dockerfile
     container_name: instigator_burrow
-    restart: always
+    restart: on-failure
     volumes:
-      - ./burrow/start.sh:/etc/burrow/start.sh
-      - ./burrow/burrow-config:/etc/burrow/
       - ./burrow/log/status/:/etc/log/
       - ./burrow/log/run/burrow.log:/etc/run/burrow.log
     ports:
@@ -127,3 +125,12 @@ services:
       - zoo2
       - zoo3
       - broker
+    external_links:
+      - "instigator_zoo1_1:zoo1"
+      - "instigator_zoo2_1:zoo2"
+      - "instigator_zoo3_1:zoo3"
+      - "instigator_broker_1:broker1"
+      - "instigator_broker_2:broker2"
+      - "instigator_broker_3:broker3"
+
+    

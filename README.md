@@ -136,3 +136,20 @@ http://localhost:5001/
 http://localhost:5001/start_consumer
 http://localhost:5001/stop_consumer
 ```
+
+
+## Burrow
+Burrow allows us to monitor consumer lag. The evaluation rules used can be found via the [link](https://github.com/linkedin/Burrow/wiki/Consumer-Lag-Evaluation-Rules).
+
+### Startup
+Run `docker-compose up burrow`. You will not see meaningful output from this command, as Burrow logs
+everything in `burrow/log`.
+
+### Connecting
+You can find the cluster list via `http://localhost:8000/v3/kafka`. See [Request Endpoints](https://github.com/linkedin/Burrow/wiki/HTTP-Endpoint#request-endpoints) for an overview
+of Burrow's REST API.
+
+### Configuring
+Burrow is configured via `burrow/burrow-config/burrow.toml`. If you make changes to this config,
+you will need to restart Burrow. Do not change the ZooKeeper and Kafka broker hostnames. See
+[Configuration](https://github.com/linkedin/Burrow/wiki/Configuration) for configuration details.
