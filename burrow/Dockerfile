@@ -4,7 +4,7 @@ ENV DEP_VERSION="0.5.1"
 RUN apk add --no-cache bash curl gcc git libc-dev && \
 	curl -L -s https://github.com/golang/dep/releases/download/v${DEP_VERSION}/dep-linux-amd64 -o $GOPATH/bin/dep && \
 	chmod +x $GOPATH/bin/dep && \
-	GO111MODULE=on go get github.com/linkedin/Burrow
+	GO111MODULE=on go get github.com/linkedin/Burrow@v1.2.2
 
 RUN cp -R $GOPATH/bin/Burrow /tmp/Burrow
 
