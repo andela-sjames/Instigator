@@ -15,6 +15,7 @@ docker-compose build
 ```
 
 ### Startup
+Enable JMX exporter for Kafka Manager before starting application.
 ```
 docker-compose up
 ```
