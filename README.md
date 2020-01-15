@@ -147,6 +147,10 @@ Burrow allows us to monitor consumer lag. The evaluation rules used can be found
 Run `docker-compose up burrow`. You will not see meaningful output from this command, as Burrow logs
 everything in `burrow/log`.
 
+# write script to bootstrap all this crap. 
+and explain it on the readme
+
+
 **Connecting**
 You can find the cluster list via `http://localhost:8000/v3/kafka`. See [Request Endpoints](https://github.com/linkedin/Burrow/wiki/HTTP-Endpoint#request-endpoints) for an overview
 of Burrow's REST API.
