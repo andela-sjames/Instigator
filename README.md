@@ -136,13 +136,12 @@ http://localhost:5000/stop_producer
 #### Go Consumer
  A simple Golang http server written to simulate a consumer for our kafka cluster. It runs on port `5001` http://localhost:5001
 
-It also comes with the following routes to start producing and to stop producing
+It also comes with the following routes to start consuming and to stop consuming
 ```
 http://localhost:5001/
 http://localhost:5001/start_consumer
 http://localhost:5001/stop_consumer
 ```
-
 
 #### Burrow
 Burrow allows us to monitor consumer lag. The evaluation rules used can be found from this [link](https://github.com/linkedin/Burrow/wiki/Consumer-Lag-Evaluation-Rules). Burrow logs everything in `burrow/log`.
