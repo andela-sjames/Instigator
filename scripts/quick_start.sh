@@ -4,4 +4,4 @@ docker-compose build
 
 ./scripts/populate_broker.sh
 
-docker-compose up
+JMX_PORT=9999 docker-compose up
