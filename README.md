@@ -3,6 +3,10 @@ A simple push/pull project that demonstrates the use of kafka for streaming data
 
 
 ## Quickstart
+This takes care of all the hassle in one command.
+```
+./scripts/quick_start.sh
+```
 
 ### Build
 ```
@@ -17,7 +21,7 @@ docker-compose build
 ### Startup
 Enable JMX exporter for Kafka Manager before starting application.
 ```
-docker-compose up
+JMX_PORT=9999 docker-compose up
 ```
 
 Allow 30~ seconds for everything to stabilize. Expect a ton of log spam until then.
@@ -141,17 +145,8 @@ http://localhost:5001/stop_consumer
 
 
 #### Burrow
-Burrow allows us to monitor consumer lag. The evaluation rules used can be found via the [link](https://github.com/linkedin/Burrow/wiki/Consumer-Lag-Evaluation-Rules).
+Burrow allows us to monitor consumer lag. The evaluation rules used can be found from this [link](https://github.com/linkedin/Burrow/wiki/Consumer-Lag-Evaluation-Rules). Burrow logs everything in `burrow/log`.
 
-**Startup**
-Run `docker-compose up burrow`. You will not see meaningful output from this command, as Burrow logs
-everything in `burrow/log`.
-
-# write script to bootstrap all this crap. 
-and explain it on the readme
-
-
-**Connecting**
 You can find the cluster list via `http://localhost:8000/v3/kafka`. See [Request Endpoints](https://github.com/linkedin/Burrow/wiki/HTTP-Endpoint#request-endpoints) for an overview
 of Burrow's REST API.
 
