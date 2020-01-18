@@ -156,8 +156,8 @@ you will need to restart Burrow. Do not change the ZooKeeper and Kafka broker ho
 
 #### Kafka-manager-pix
 
-![Kafka-Manager-overview](overview.png)
+![Kafka-Manager-overview](pics/overview.png)
 
-![Kafka-Manager-topics](topics.png)
+![Kafka-Manager-topics](pics/topics.png)
 
-![Kafka-Manager-csm-group](consumer_group.png)
+![Kafka-Manager-csm-group](pics/consumer_group.png)
