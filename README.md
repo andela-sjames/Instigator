@@ -149,3 +149,12 @@ of Burrow's REST API.
 Burrow is configured via `burrow/burrow-config/burrow.toml`. If you make changes to this config,
 you will need to restart Burrow. Do not change the ZooKeeper and Kafka broker hostnames. See
 [Configuration](https://github.com/linkedin/Burrow/wiki/Configuration) for configuration details.
+
+
+#### Kafka-manager-pix
+
+![Kafka-Manager-overview](overview.png)
+
+![Kafka-Manager-topics](topics.png)
+
+![Kafka-Manager-csm-group](consumer_group.png)
