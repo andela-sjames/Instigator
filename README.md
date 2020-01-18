@@ -8,6 +8,9 @@ To develop and/or run this application, download and install [docker](https://ww
 `./scripts/populate_broker.sh`
 This will populate the kafka cluster with dummy topics, these topics are referenced by the producer and the consumer, well not all the topics though. Just the topic called `SampleOne`
 
+`./scripts/quick_start.sh`
+As a bootstrap script to build the services, populate the brokers with topics and to start the application.
+
 
 ### Quickstart
 Run the command below and grab a cup  of coffee... This will take care of all the hassle in one command.
@@ -16,7 +19,7 @@ Run the command below and grab a cup  of coffee... This will take care of all th
 $./scripts/quick_start.sh
 ```
 
-###Step-by-step build
+### Step-by-step build
 
 ```
 $docker-compose build
