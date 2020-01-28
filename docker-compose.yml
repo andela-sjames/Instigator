@@ -55,6 +55,7 @@ services:
       - ./kafka/docker-entrypoint.sh:/opt/kafka/bin/docker-entrypoint.sh
     ports:
       - 9092-9094:${KAFKA_PORT:-9092}
+      - 7070-7072:${PROMETHEUS_PORT:-7072}
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=zoo1:2181,zoo2:2181,zoo3:2181
       - JMX_PORT=${JMX_PORT}
