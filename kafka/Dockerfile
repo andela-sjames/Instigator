@@ -13,7 +13,9 @@ RUN mkdir -p $KAFKA_HOME_DIR \
  && gpg --import KEYS \
  && gpg --verify kafka_2.11-${KAFKA_VERSION}.tgz.asc kafka_2.11-${KAFKA_VERSION}.tgz \
  && tar xfz kafka_2.11-${KAFKA_VERSION}.tgz -C $KAFKA_HOME_DIR --strip-components=1 \
- && rm kafka_2.11-${KAFKA_VERSION}.* KEYS
+ && rm kafka_2.11-${KAFKA_VERSION}.* KEYS \
+ && wget -q --directory-prefix=$KAFKA_HOME_DIR https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.12.0/jmx_prometheus_javaagent-0.12.0.jar \
+ && wget -q --directory-prefix=$KAFKA_HOME_DIR https://raw.githubusercontent.com/prometheus/jmx_exporter/master/example_configs/kafka-0-8-2.yml
 
 ENV PATH=${PATH}:${KAFKA_HOME_DIR}/bin
 

@@ -134,4 +134,5 @@ services:
       - "instigator_broker_3:broker3"
 
 networks:
-  instigator:
+  default:
+      name: Instigator

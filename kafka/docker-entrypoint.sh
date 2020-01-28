@@ -35,4 +35,5 @@ min.insync.replicas=$KAFKA_MIN_INSYNC_REPLICAS
 num.replica.fetchers=$KAFKA_NUM_REPLICA_FETCHERS
 EOF
 
+KAFKA_OPTS="$KAFKA_OPTS -javaagent:$KAFKA_HOME_DIR/jmx_prometheus_javaagent-0.12.0.jar=$PROMETHEUS_PORT:$KAFKA_HOME_DIR/kafka-0-8-2.yml"
 exec "$KAFKA_HOME_DIR/bin/kafka-server-start.sh" /etc/kafka/server.properties
