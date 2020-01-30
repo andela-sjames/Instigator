@@ -1,50 +1,57 @@
 # Instigator
 A simple push/pull project that demonstrates the use of kafka for streaming data between two services i.e. a producer and a consumer.
 
-### Docker
+## Docker
+
 To develop and/or run this application, download and install [docker](https://www.docker.com/get-started) and [docker-compose](https://docs.docker.com/compose/install/) from their website before proceeding.
 
-### Scripts
+## Scripts
+
 `./scripts/populate_broker.sh`
 This will populate the kafka cluster with dummy topics, these topics are referenced by the producer and the consumer, well not all the topics though. Just the topic called `SampleOne`
 
 `./scripts/quick_start.sh`
 As a bootstrap script to build the services, populate the brokers with topics and to start the application.
 
+## Quickstart
 
-### Quickstart
 Run the command below and grab a cup  of coffee... This will take care of all the hassle in one command.
 
-```
+```shell
 $./scripts/quick_start.sh
 ```
 
-### Step-by-step build
+## Step-by-step build
 
-```
+```shell
 $docker-compose build
 ```
-```
+
+```shell
 $./scripts/populate_broker.sh
 ```
 
 Enable JMX exporter for Kafka Manager before starting application.
-```
-JMX_PORT=9999 docker-compose up
+
+``` shell
+$JMX_PORT=9999 docker-compose up
 ```
 
 Allow 30~ seconds for everything to stabilize. Expect a ton of log spam until then.
 
 
-### Stop Docker
+## Stop Docker
+
 `docker-compose down` or `CMD/ctrl + C` to stop the application.
 I prefer `docker-compose down` as it stops all running containers and removes the underlying default network.
 
 
 
-### Working with topics
+## Working with topics
+
 Ensure brokers are running. After that, execute a variation of the following command.
-```
+
+```shell
 docker exec instigator_broker_1 kafka-topics.sh \
   --create \
   --zookeeper zoo3:2181 \
@@ -74,21 +81,24 @@ The application consists of the following services:
 These services are coupled together using the `docker-compose.yml` file at the **root** of the application.
 
 ### Brief context:
+
 Kafka relies on Zookeeper to work as zookeeper stores a couple of things like kafka's brokers metadata, Topics metadata, Consumers metadata and partition offset? a question mark there because recent versions of Kafka allows for this to be stored on the kafka cluster as well.
 
 ### Zookeeper Ensemble:
+
 Ideally, this replication mode should not be deployed on the same physical machine but let's allow this for development and for proof of concept.
 Reference: https://hub.docker.com/_/zookeeper,
 
 
 #### Zookeeper:
+
 It comes with an admin server enabled by default
 http://localhost:{8080-8082}/commands/{stats} where `stat` can be any of the following
 e.g. http://localhost:8081/commands/dirs, http://localhost:8080/commands/stats
 
 Here we are checking two different nodes on the zookeeper ensemble. Zookeeper runs on port `{2181 - 2183}` on the host machine but on port `2181` on the docker containers to avoid port collision as we can't re-use ports.
 
-```
+```shell
 configuration
 connection_stat_reset
 connections
@@ -109,40 +119,49 @@ watches_by_path
 ```
 
 #### Kafka Brokers:
+
 Runs on port `{9092-9094}`on the local machines and on port `9092` for the containers, it uses the `KAFKA_ZOOKEEPER_CONNECT=zoo1:2181,zoo2:2181,zoo3:2181` env variable to send it's metadata to the zookeeper ensemble before operations begins.
 
 #### Kafka-Manager:
+
 This runs on port `9000`, http://localhost:9000, this gives you access to the `kafka-manager` admin UI where you can create a cluster and monitor the activities of your cluster in realtime while performing admistrative task on your cluster to optimize performance.
 
 For this setup add this line `zoo1:2181,zoo2:2181,zoo3:2181` to the cluster host field when you need to create a cluster from the UI dashboard.
-```
+
+```shell
 Username: admin
 password: admin
 ```
 
 #### Python Producer
+
  A simple python http server written using the flask framework to simulate a producer for our kafka cluster. It runs on port `5000` http://localhost:5000
 
 It also comes with the following routes to start producing and to stop producing
-```
+
+```shell
 http://localhost:5000/
 http://localhost:5000/start_producer
 http://localhost:5000/stop_producer
 ```
 
 #### Go Consumer
+
  A simple Golang http server written to simulate a consumer for our kafka cluster. It runs on port `5001` http://localhost:5001
 
 It also comes with the following routes to start consuming and to stop consuming **(dummy route)**
+
 - To stop consuming simply use the `http://localhost:5000/stop_producer` route, that way the consumer will naturally stop consuming data
 
-```
+
+```shell
 http://localhost:5001/
 http://localhost:5001/start_consumer
 http://localhost:5001/stop_consumer
 ```
 
 #### Burrow
+
 Burrow allows us to monitor consumer lag. The evaluation rules used can be found from this [link](https://github.com/linkedin/Burrow/wiki/Consumer-Lag-Evaluation-Rules). Burrow logs everything in `burrow/log`.
 
 You can find the cluster list via `http://localhost:8000/v3/kafka`. See [Request Endpoints](https://github.com/linkedin/Burrow/wiki/HTTP-Endpoint#request-endpoints) for an overview
@@ -152,7 +171,6 @@ of Burrow's REST API.
 Burrow is configured via `burrow/burrow-config/burrow.toml`. If you make changes to this config,
 you will need to restart Burrow. Do not change the ZooKeeper and Kafka broker hostnames. See
 [Configuration](https://github.com/linkedin/Burrow/wiki/Configuration) for configuration details.
-
 
 #### Kafka-manager-pix
 
