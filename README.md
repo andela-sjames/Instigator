@@ -2,6 +2,10 @@
 
 A simple push/pull project that demonstrates the use of kafka for streaming data between two services i.e. a producer and a consumer.
 
+## Blog Post
+
+<https://medium.com/@jamesvaresamuel/producer-kafka-consumer-relationship-using-docker-6bbd5e116f5>
+
 ## Docker
 
 To develop and/or run this application, download and install [docker](https://www.docker.com/get-started) and [docker-compose](https://docs.docker.com/compose/install/) from their website before proceeding.
