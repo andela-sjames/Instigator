@@ -1,4 +1,5 @@
 # Instigator
+
 A simple push/pull project that demonstrates the use of kafka for streaming data between two services i.e. a producer and a consumer.
 
 ## Docker
@@ -39,13 +40,10 @@ $JMX_PORT=9999 docker-compose up
 
 Allow 30~ seconds for everything to stabilize. Expect a ton of log spam until then.
 
-
 ## Stop Docker
 
 `docker-compose down` or `CMD/ctrl + C` to stop the application.
 I prefer `docker-compose down` as it stops all running containers and removes the underlying default network.
-
-
 
 ## Working with topics
 
@@ -66,7 +64,6 @@ When creating a topic, you should stick to `--replication-factor 3` unless you h
 reason to use less replication. You cannot use a value greater than 3, as there are only 3 brokers.
 To learn more about replication, see the [docs](https://kafka.apache.org/documentation/#replication).
 
-
 ## Services
 
 The application consists of the following services:
@@ -80,17 +77,17 @@ The application consists of the following services:
 
 These services are coupled together using the `docker-compose.yml` file at the **root** of the application.
 
-### Brief context:
+### Brief context
 
 Kafka relies on Zookeeper to work as zookeeper stores a couple of things like kafka's brokers metadata, Topics metadata, Consumers metadata and partition offset? a question mark there because recent versions of Kafka allows for this to be stored on the kafka cluster as well.
 
-### Zookeeper Ensemble:
+### Zookeeper Ensemble
 
 Ideally, this replication mode should not be deployed on the same physical machine but let's allow this for development and for proof of concept.
 Reference: https://hub.docker.com/_/zookeeper,
 
 
-#### Zookeeper:
+#### Zookeeper
 
 It comes with an admin server enabled by default
 http://localhost:{8080-8082}/commands/{stats} where `stat` can be any of the following
@@ -118,11 +115,11 @@ watches
 watches_by_path
 ```
 
-#### Kafka Brokers:
+#### Kafka Brokers
 
 Runs on port `{9092-9094}`on the local machines and on port `9092` for the containers, it uses the `KAFKA_ZOOKEEPER_CONNECT=zoo1:2181,zoo2:2181,zoo3:2181` env variable to send it's metadata to the zookeeper ensemble before operations begins.
 
-#### Kafka-Manager:
+#### Kafka-Manager
 
 This runs on port `9000`, http://localhost:9000, this gives you access to the `kafka-manager` admin UI where you can create a cluster and monitor the activities of your cluster in realtime while performing admistrative task on your cluster to optimize performance.
 
@@ -152,7 +149,6 @@ http://localhost:5000/stop_producer
 It also comes with the following routes to start consuming and to stop consuming **(dummy route)**
 
 - To stop consuming simply use the `http://localhost:5000/stop_producer` route, that way the consumer will naturally stop consuming data
-
 
 ```shell
 http://localhost:5001/
