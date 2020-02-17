@@ -88,13 +88,13 @@ Kafka relies on Zookeeper to work as zookeeper stores a couple of things like ka
 ### Zookeeper Ensemble
 
 Ideally, this replication mode should not be deployed on the same physical machine but let's allow this for development and for proof of concept.
-Reference: https://hub.docker.com/_/zookeeper,
+Reference: <https://hub.docker.com/_/zookeeper>,
 
 #### Zookeeper
 
 It comes with an admin server enabled by default
-http://localhost:{8080-8082}/commands/{stats} where `stat` can be any of the following
-e.g. http://localhost:8081/commands/dirs, http://localhost:8080/commands/stats
+<http://localhost:{8080-8082}/commands/{stats}> where `stat` can be any of the following
+e.g. <http://localhost:8081/commands/dirs>, <http://localhost:8080/commands/stats>
 
 Here we are checking two different nodes on the zookeeper ensemble. Zookeeper runs on port `{2181 - 2183}` on the host machine but on port `2181` on the docker containers to avoid port collision as we can't re-use ports.
 
@@ -128,7 +128,7 @@ Runs on port `{9092-9094}`on the local machines and on port `9092` for the conta
 
 #### Kafka-Manager
 
-This runs on port `9000`, http://localhost:9000, this gives you access to the `kafka-manager` admin UI where you can create a cluster and monitor the activities of your cluster in realtime while performing admistrative task on your cluster to optimize performance.
+This runs on port `9000`, <http://localhost:9000>, this gives you access to the `kafka-manager` admin UI where you can create a cluster and monitor the activities of your cluster in realtime while performing admistrative task on your cluster to optimize performance.
 
 For this setup add this line `zoo1:2181,zoo2:2181,zoo3:2181` to the cluster host field when you need to create a cluster from the UI dashboard.
 
@@ -139,7 +139,7 @@ password: admin
 
 #### Python Producer
 
- A simple python http server written using the flask framework to simulate a producer for our kafka cluster. It runs on port `5000` http://localhost:5000
+ A simple python http server written using the flask framework to simulate a producer for our kafka cluster. It runs on port `5000` <http://localhost:5000>
 
 It also comes with the following routes to start producing and to stop producing
 
@@ -151,7 +151,7 @@ http://localhost:5000/stop_producer
 
 #### Go Consumer
 
- A simple Golang http server written to simulate a consumer for our kafka cluster. It runs on port `5001` http://localhost:5001
+ A simple Golang http server written to simulate a consumer for our kafka cluster. It runs on port `5001` <http://localhost:5001>
 
 It also comes with the following routes to start consuming and to stop consuming **(dummy route)**
 
