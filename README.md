@@ -90,7 +90,6 @@ Kafka relies on Zookeeper to work as zookeeper stores a couple of things like ka
 Ideally, this replication mode should not be deployed on the same physical machine but let's allow this for development and for proof of concept.
 Reference: https://hub.docker.com/_/zookeeper,
 
-
 #### Zookeeper
 
 It comes with an admin server enabled by default
@@ -122,6 +121,10 @@ watches_by_path
 #### Kafka Brokers
 
 Runs on port `{9092-9094}`on the local machines and on port `9092` for the containers, it uses the `KAFKA_ZOOKEEPER_CONNECT=zoo1:2181,zoo2:2181,zoo3:2181` env variable to send it's metadata to the zookeeper ensemble before operations begins.
+
+### Know thy Kafka
+
+<https://jaceklaskowski.gitbooks.io/apache-kafka/>
 
 #### Kafka-Manager
 
